@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123123
+    url: jdbc:mysql://localhost:3306/even?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+server:
+  servlet:
+    context-path: /sell
+  port: 8088
+logging:
+  pattern:
+#    console: "%d - %msg%n"
