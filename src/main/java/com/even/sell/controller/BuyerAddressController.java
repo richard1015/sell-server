@@ -85,4 +85,15 @@ public class BuyerAddressController {
         return ResultVOUtil.success();
     }
 
+    /**
+     * 添加地址
+     *
+     * @return
+     */
+    @PostMapping("/add")
+    public ResultVO add(@RequestBody BuyerAddress buyerAddress, HttpServletRequest request) {
+        BuyerAddress buyerAddress1 = buyerAddressRepository.save(buyerAddress);
+        return buyerAddress1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
+    }
+
 }
