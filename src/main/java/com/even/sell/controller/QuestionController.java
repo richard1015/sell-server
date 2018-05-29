@@ -65,6 +65,7 @@ public class QuestionController {
     @PostMapping("/reply")
     public ResultVO reply(@Valid @RequestBody Question question) {
         question.setUpdateTime(new Date());
+        question.setStatus(1);
         int codeRes = questionRepository.updateById(question.getSellerId(),question.getReply(),question.getStatus(),question.getUpdateTime(),question.getId());
         return codeRes >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "回复失败");
     }
