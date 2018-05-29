@@ -17,11 +17,19 @@ import java.util.Date;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
-    private String comment;
+    private String buyerId;
+
+    private String sellerId;
+
+    private String title;
+
+    private String content;
 
     private String reply;
+
+    private int status;
 
     private Date createTime;
 
