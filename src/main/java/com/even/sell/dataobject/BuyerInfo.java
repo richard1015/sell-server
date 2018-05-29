@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author EVEN
@@ -18,5 +19,9 @@ public class BuyerInfo {
     private String username;
 
     private String password;
+
+    private String tel;
+    private String sex;
+    private String email;
 
 }

@@ -1,6 +1,10 @@
 package com.even.sell.service;
 
+import com.even.sell.VO.ResultVO;
 import com.even.sell.dataobject.BuyerInfo;
+import com.even.sell.form.LoginForm;
+
+import javax.validation.Valid;
 
 /**
  * 买家用户
@@ -14,4 +18,5 @@ public interface BuyerService {
 
     BuyerInfo findBuyerInfoByUsername(String unsername);
 
+    ResultVO insert(@Valid BuyerInfo buyerInfo);
 }

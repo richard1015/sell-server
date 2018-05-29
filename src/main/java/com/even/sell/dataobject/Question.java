@@ -9,33 +9,22 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * 买家地址
  * @author EVEN
  * 2018/5/1 19:33
  */
 @Data
 @Entity
-public class BuyerAddress {
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
-    private String buyerId;
+    private String comment;
 
-    private String recName;
-
-    private String streetName;
-
-    private String postCode;
-
-    private String tel;
-
-    private boolean isDefault;
+    private String reply;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public BuyerAddress() {
-    }
 }

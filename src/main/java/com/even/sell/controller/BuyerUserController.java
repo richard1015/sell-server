@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +34,7 @@ public class BuyerUserController {
 
     @Autowired
     private BuyerService buyerService;
+
     @Autowired
     private BuyerInfoRepository buyerInfoRepository;
 
@@ -108,13 +108,25 @@ public class BuyerUserController {
     @PostMapping("/register")
     public ResultVO register(HttpServletRequest request, @Valid @RequestBody BuyerInfo buyerInfo) {
         //1. 从cookie里查询
-
-        buyerInfo.setId("id_" + buyerInfo.getUsername());
-
+        if (buyerInfo.getId() == null) {
+            buyerInfo.setId("id_" + buyerInfo.getUsername());
+        }
         BuyerInfo buyerInfo1 = buyerInfoRepository.save(buyerInfo);
         return buyerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
     }
 
+
+    /**
+     * 修改
+     *
+     * @return
+     */
+    @PostMapping("/update")
+    public ResultVO update(HttpServletRequest request, @Valid @RequestBody BuyerInfo buyerInfo) {
+
+        int res = buyerInfoRepository.updateById(buyerInfo.getTel(),buyerInfo.getEmail(),buyerInfo.getSex(),buyerInfo.getId());
+        return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
+    }
 
 }
 
