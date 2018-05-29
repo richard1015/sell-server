@@ -91,7 +91,7 @@ public class BuyerOrderController {
                                   @RequestParam(value = "sort", defaultValue = "1") Integer sort,
                                   @RequestParam(value = "buyerOpenid", defaultValue = "1") String buyerOpenid) {
         PageRequest pageRequest = new PageRequest(page-1,size);
-        Page<OrderDTO> page1= orderService.findList("id_even",pageRequest);
+        Page<OrderDTO> page1= orderService.findList(buyerOpenid,pageRequest);
 
         return ResultVOUtil.success(page1);
     }
