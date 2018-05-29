@@ -87,11 +87,11 @@ public class BuyerOrderController {
      */
     @GetMapping("/list")
     public ResultVO orderTotal1(  @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "size", defaultValue = "8") Integer size,
+                                  @RequestParam(value = "size", defaultValue = "999") Integer size,
                                   @RequestParam(value = "sort", defaultValue = "1") Integer sort,
                                   @RequestParam(value = "buyerOpenid", defaultValue = "1") String buyerOpenid) {
         PageRequest pageRequest = new PageRequest(page-1,size);
-        Page<OrderDTO> page1= orderService.findList("id_even",pageRequest);
+        Page<OrderDTO> page1= orderService.findList(buyerOpenid,pageRequest);
 
         return ResultVOUtil.success(page1);
     }
