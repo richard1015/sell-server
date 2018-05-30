@@ -3,14 +3,11 @@ package com.even.sell.controller;
 import com.even.sell.VO.OrderMasterVO;
 import com.even.sell.VO.ResultVO;
 import com.even.sell.dataobject.BuyerAddress;
-import com.even.sell.dataobject.Cart;
 import com.even.sell.dataobject.OrderDetail;
 import com.even.sell.dataobject.OrderMaster;
 import com.even.sell.dto.OrderDTO;
-import com.even.sell.enums.ResultEnum;
 import com.even.sell.form.CartForm;
 import com.even.sell.form.CartInfo;
-import com.even.sell.form.OrderForm;
 import com.even.sell.repository.BuyerAddressRepository;
 import com.even.sell.repository.CartRepository;
 import com.even.sell.repository.OrderDetailRepository;
@@ -86,12 +83,15 @@ public class BuyerOrderController {
      * @return
      */
     @GetMapping("/list")
-    public ResultVO orderTotal1(  @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "size", defaultValue = "999") Integer size,
-                                  @RequestParam(value = "sort", defaultValue = "1") Integer sort,
-                                  @RequestParam(value = "buyerOpenid", defaultValue = "1") String buyerOpenid) {
-        PageRequest pageRequest = new PageRequest(page-1,size);
-        Page<OrderDTO> page1= orderService.findList(buyerOpenid,pageRequest);
+    public ResultVO orderTotal1(HttpServletRequest request,
+                                @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                @RequestParam(value = "size", defaultValue = "999") Integer size,
+                                @RequestParam(value = "sort", defaultValue = "1") Integer sort) {
+        Cookie cookie = CookieUtil.get(request, "userId");
+        String buyerId = buyerService.findBuyerInfoById(cookie.getValue()).getId();
+
+        PageRequest pageRequest = new PageRequest(page - 1, size);
+        Page<OrderDTO> page1 = orderService.findList(buyerId, pageRequest);
 
         return ResultVOUtil.success(page1);
     }
