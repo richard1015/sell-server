@@ -9,7 +9,7 @@ spring:
 server:
   servlet:
     context-path: /sell
-  port: 8205
+  port: 8105
 logging:
   pattern:
 #    console: "%d - %msg%n"

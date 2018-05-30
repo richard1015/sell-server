@@ -54,6 +54,8 @@ public class BuyerUserController {
         if (buyerInfo == null) {
             return ResultVOUtil.error(ResultEnum.LOGIN_FAIL.getCode(), ResultEnum.LOGIN_FAIL.getMessage());
         } else {
+            UserVO userVO = new UserVO();
+            userVO.setUserName(buyerInfo.getUsername());
             if (buyerInfo.getPassword().equals(loginForm.getUserPwd())) {
                 CookieUtil.set(response, "userId", buyerInfo.getId(), EXPIRE);
                 return ResultVOUtil.success(buyerInfo);

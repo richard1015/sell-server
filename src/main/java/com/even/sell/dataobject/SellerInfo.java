@@ -24,6 +24,9 @@ public class SellerInfo {
     private String openid;
 
     private String state;
+
+    private String email;
+    private String tel;
     private Date createTime;
     private Date updateTime;
 }

@@ -2,6 +2,7 @@ package com.even.sell.controller;
 
 import com.even.sell.VO.ResultVO;
 import com.even.sell.constant.CookieConstant;
+import com.even.sell.dataobject.BuyerInfo;
 import com.even.sell.dataobject.SellerInfo;
 import com.even.sell.enums.ResultEnum;
 import com.even.sell.repository.SellerInfoRepository;
@@ -10,14 +11,13 @@ import com.even.sell.utils.CookieUtil;
 import com.even.sell.utils.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -99,5 +99,33 @@ public class SellerUserController {
         map.put("url", "/sell/seller/login");
         return new ModelAndView("common/success", map);
     }
+
+
+
+    /**
+     * 修改
+     *
+     * @return
+     */
+    @PostMapping("/update")
+    public ResultVO update(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
+        int res = sellerInfoRepository.updateById(sellerInfo.getTel(),sellerInfo.getEmail(),sellerInfo.getId());
+        return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
+    }
+
+    /**
+     * 买家检查登陆状态
+     *
+     * @return
+     */
+    @PostMapping("/register")
+    public ResultVO register(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
+        if (sellerInfo.getId() == null) {
+            sellerInfo.setId("id_" + sellerInfo.getUsername());
+        }
+        SellerInfo sellerInfo1 = sellerInfoRepository.save(sellerInfo);
+        return sellerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "添加失败");
+    }
+
 
 }
