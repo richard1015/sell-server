@@ -38,7 +38,7 @@
                             <td>${productInfo.status}</td>
                             <td>${productInfo.createTime}</td>
                             <td>${productInfo.updateTime!""}</td>
-                            <td><a href="/sell/buyer/question/index?id=${productInfo.id}">回复</a></td>
+                            <td><a href="/sell/buyer/question/index?questionId=${productInfo.id}">回复</a></td>
                         </tr>
                         </#list>
                         </tbody>

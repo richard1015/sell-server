@@ -53,7 +53,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-fw fa-plus"></i> 统计分析 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li class="dropdown-header">操作</li>
-                <li><a href="/sell/seller/category/list">列表</a></li>
+                <li><a href="/sell/seller/report/list">列表</a></li>
             </ul>
         </li>
 
