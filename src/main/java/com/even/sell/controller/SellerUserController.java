@@ -18,10 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 卖家用户
@@ -148,7 +145,8 @@ public class SellerUserController {
     @GetMapping("/user/index")
     public ModelAndView index(@RequestParam(value = "id", required = false) String id,     Map<String, Object> map) {
         if (id != null) {
-            SellerInfo sellerInfo = sellerInfoRepository.findById(Integer.valueOf(id));
+           Optional<SellerInfo> sellerInfoOptional = sellerInfoRepository.findById(id);
+           SellerInfo sellerInfo = sellerInfoOptional.get();
             map.put("user", sellerInfo);
         }
         return new ModelAndView("user/index", map);
