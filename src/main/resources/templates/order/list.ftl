@@ -133,7 +133,7 @@
     }
 
     websocket.onerror = function () {
-        alert('websocket通信发生错误！');
+        // alert('websocket通信发生错误！');
     }
 
     window.onbeforeunload = function () {

@@ -96,7 +96,7 @@ public class SellerUserController {
         }
 
         map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/order/list");
+        map.put("url", "/sell/seller/login");
         return new ModelAndView("common/success", map);
     }
 
