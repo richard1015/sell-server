@@ -26,6 +26,8 @@ public interface QuestionRepository extends JpaRepository<Question, String> {
 
     public List<Question> findBySellerId(String sellerId);
 
+    public Question findById(Integer id);
+
 
   /*  @Modifying
     @Query("update buyer_info as c set c.name = ?1 where c.userid=?2")

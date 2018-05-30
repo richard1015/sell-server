@@ -112,17 +112,15 @@ public class QuestionController {
      * @param map
      * @return
      */
-    @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "questionId", required = false) String questionId,
+    @PostMapping("/findById")
+    public ResultVO index(@RequestParam(value = "questionId", required = false) String questionId,
                               Map<String, Object> map) {
         if (questionId != null) {
-            Question question=new Question();
-            question.setCreateTime(new Date());
-            question.setSellerId(questionId);
-            List<Question> questionList =  questionRepository.findBySellerId(question.getSellerId());
-            map.put("question", questionList);
+            Question question1 =  questionRepository.findById(Integer.valueOf(questionId));
+            return ResultVOUtil.success(question1);
+        }else{
+            return ResultVOUtil.error(50000,"id不能为空");
         }
-        return new ModelAndView("feedback/index", map);
     }
 
 }
