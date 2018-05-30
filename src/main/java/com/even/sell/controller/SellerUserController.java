@@ -138,5 +138,11 @@ public class SellerUserController {
         map.put("userList",sellerInfoList);
         return new ModelAndView("user/list",map);
     }
-
+    /**
+     * 新增用户
+     **/
+    @GetMapping("/user/index")
+    public ModelAndView logout() {
+        return new ModelAndView("user/index");
+    }
 }

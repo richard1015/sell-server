@@ -18,6 +18,8 @@ public class ReportController {
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map) {
         map.put("list", "");
+        map.put("list", "");
+        map.put("list", "");
         return new ModelAndView("report/list", map);
     }
 }

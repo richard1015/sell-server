@@ -37,7 +37,6 @@
 </body>
 <script>
     function login() {
-        debugger
         var userId=$("#username").val();
         var pwd=$("#password").val();
         $.ajax({

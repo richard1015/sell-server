@@ -1,4 +1,5 @@
 <html>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <#include "../common/header.ftl">
 
 <body>
@@ -33,12 +34,28 @@
                             <td>${productInfo.id}</td>
                             <td>${productInfo.buyerId}</td>
                             <td>${productInfo.title}</td>
-                            <td>${productInfo.content!""}</td>
-                            <td>${productInfo.reply!""}</td>
-                            <td>${productInfo.status}</td>
+                            <td><textarea name="" id="" cols="30" rows="3">${productInfo.content!""}</textarea></td>
+                            <td><textarea name="" id="q${productInfo.id}" cols="30"
+                                          rows="3">${productInfo.reply!""}</textarea></td>
+                            <td>
+                                <#if productInfo.status==0>
+                                    未回复
+                                </#if>
+                                  <#if productInfo.status==1>
+                                    已回复
+                                  </#if>
+                            </td>
                             <td>${productInfo.createTime}</td>
                             <td>${productInfo.updateTime!""}</td>
-                            <td><a href="/sell/buyer/question/index?questionId=${productInfo.id}">回复</a></td>
+                            <td>
+                                  <#if productInfo.status==0>
+                                                                    <a href="javascript:void(0)"
+                                                                       onclick="reply(${productInfo.id})">回复</a>
+                                  </#if>
+                                  <#if productInfo.status==1>
+                                    无
+                                  </#if>
+                            </td>
                         </tr>
                         </#list>
                         </tbody>
@@ -48,5 +65,29 @@
         </div>
 
     </div>
+    <script>
+        function reply(id) {
+            var replycontent = $("#q" + id).val();
+            if (!eplycontent) {
+                alert("请填写回复内容");
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/sell/buyer/question/reply",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    id: id,
+                    reply: replycontent
+                }),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 0) {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
