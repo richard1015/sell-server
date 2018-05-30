@@ -68,8 +68,9 @@
     <script>
         function reply(id) {
             var replycontent = $("#q" + id).val();
-            if (!eplycontent) {
+            if (!replycontent) {
                 alert("请填写回复内容");
+                return;
             }
             $.ajax({
                 type: 'POST',

@@ -3,14 +3,19 @@ package com.even.sell.controller;
 import com.even.sell.VO.ResultVO;
 import com.even.sell.constant.CookieConstant;
 import com.even.sell.dataobject.BuyerInfo;
+import com.even.sell.dataobject.ProductCategory;
 import com.even.sell.dataobject.SellerInfo;
 import com.even.sell.enums.ResultEnum;
+import com.even.sell.exception.SellException;
+import com.even.sell.form.CategoryForm;
 import com.even.sell.repository.SellerInfoRepository;
 import com.even.sell.service.SellerService;
 import com.even.sell.utils.CookieUtil;
 import com.even.sell.utils.ResultVOUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,7 +50,7 @@ public class SellerUserController {
     @PostMapping("/login")
     @ResponseBody
     public ResultVO login(
-            HttpServletResponse response,@RequestBody SellerInfo sellerInfo) {
+            HttpServletResponse response, @RequestBody SellerInfo sellerInfo) {
 
         //1. openid去和数据库里的数据匹配
         SellerInfo sellerInfo1 = sellerInfoRepository.findByUsernameAndPassword(sellerInfo.getUsername(), sellerInfo.getPassword());
@@ -63,7 +68,7 @@ public class SellerUserController {
 //
 //        //3. 设置token至cookie
 //        CookieUtil.set(response, CookieConstant.TOKEN, token, EXPIRE);
-        return sellerInfo1!=null ? ResultVOUtil.success(sellerInfo1) : ResultVOUtil.error(50000, "失败");
+        return sellerInfo1 != null ? ResultVOUtil.success(sellerInfo1) : ResultVOUtil.error(50000, "失败");
 //        //return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sell/seller/order/list");
 //        return new ModelAndView("redirect:" + "/sell/seller/order/list");
     }
@@ -98,7 +103,6 @@ public class SellerUserController {
     }
 
 
-
     /**
      * 修改
      *
@@ -108,8 +112,8 @@ public class SellerUserController {
     @ResponseBody
     public ResultVO update(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
         sellerInfo.setUpdateTime(new Date());
-        int res = sellerInfoRepository.updateById(sellerInfo.getTel(),sellerInfo.getEmail(),sellerInfo.getUpdateTime(),sellerInfo.getId());
-        return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
+        int res = sellerInfoRepository.updateById(sellerInfo.getTel(), sellerInfo.getEmail(), sellerInfo.getUpdateTime(), sellerInfo.getId());
+        return res > 0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
     }
 
     /**
@@ -126,28 +130,32 @@ public class SellerUserController {
         SellerInfo sellerInfo1 = sellerInfoRepository.save(sellerInfo);
         return sellerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "添加失败");
     }
+
     /**
-    * 获取用户列表
-    **/
+     * 获取用户列表
+     **/
     @GetMapping("/user/list")
-    public ModelAndView logout( Map<String, Object> map) {
+    public ModelAndView logout(Map<String, Object> map) {
         List<SellerInfo> sellerInfoList = sellerInfoRepository.findAll();
-        map.put("userList",sellerInfoList);
-        return new ModelAndView("user/list",map);
+        map.put("userList", sellerInfoList);
+        return new ModelAndView("user/list", map);
     }
 
     /**
      * 展示
+     *
      * @param id
      * @param map
      * @return
      */
     @GetMapping("/user/index")
-    public ModelAndView index(@RequestParam(value = "id", required = false) String id,     Map<String, Object> map) {
+    public ModelAndView index(@RequestParam(value = "id", required = false) String id, Map<String, Object> map) {
         if (id != null) {
-           Optional<SellerInfo> sellerInfoOptional = sellerInfoRepository.findById(id);
-           SellerInfo sellerInfo = sellerInfoOptional.get();
+            Optional<SellerInfo> sellerInfoOptional = sellerInfoRepository.findById(id);
+            SellerInfo sellerInfo = sellerInfoOptional.get();
             map.put("user", sellerInfo);
+        } else {
+            map.put("user", new SellerInfo());
         }
         return new ModelAndView("user/index", map);
     }
