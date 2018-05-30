@@ -80,7 +80,7 @@ public class BuyerCartController {
      * @return
      */
     @GetMapping("/list")
-    public ResultVO list(HttpServletRequest request) {
+        public ResultVO list(HttpServletRequest request) {
         Cookie cookie = CookieUtil.get(request, "userId");
         String buyerId = buyerService.findBuyerInfoById(cookie.getValue()).getId();
         List<Cart> carts = cartService.findList(buyerId);
