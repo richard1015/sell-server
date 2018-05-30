@@ -18,6 +18,7 @@
                         <tr>
                             <th>问题id</th>
                             <th>提问用户</th>
+                            <th>回复用户</th>
                             <th>问题描述</th>
                             <th>问题内容</th>
                             <th>回复内容</th>
@@ -33,6 +34,7 @@
                         <tr>
                             <td>${productInfo.id}</td>
                             <td>${productInfo.buyerId}</td>
+                            <td>${productInfo.sellerId!""}</td>
                             <td>${productInfo.title}</td>
                             <td><textarea name="" id="" cols="30" rows="3">${productInfo.content!""}</textarea></td>
                             <td><textarea name="" id="q${productInfo.id}" cols="30"
@@ -67,6 +69,9 @@
     </div>
     <script>
         function reply(id) {
+            var userInfo= localStorage.getItem("userInfo");
+            userInfo=JSON.parse(userInfo);
+            var sellerId=userInfo.id;
             var replycontent = $("#q" + id).val();
             if (!replycontent) {
                 alert("请填写回复内容");
@@ -78,7 +83,8 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({
                     id: id,
-                    reply: replycontent
+                    reply: replycontent,
+                    sellerId:sellerId
                 }),
                 dataType: 'json',
                 success: function (data) {
