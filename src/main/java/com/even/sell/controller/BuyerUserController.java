@@ -123,8 +123,9 @@ public class BuyerUserController {
      */
     @PostMapping("/update")
     public ResultVO update(HttpServletRequest request, @Valid @RequestBody BuyerInfo buyerInfo) {
-
-        int res = buyerInfoRepository.updateById(buyerInfo.getTel(),buyerInfo.getEmail(),buyerInfo.getSex(),buyerInfo.getId());
+        Cookie cookie = CookieUtil.get(request, "userId");
+        String buyerId = buyerService.findBuyerInfoById(cookie.getValue()).getId();
+        int res = buyerInfoRepository.updateById(buyerInfo.getTel(),buyerInfo.getEmail(),buyerInfo.getSex(),buyerId);
         return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
     }
 
