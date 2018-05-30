@@ -148,7 +148,7 @@ public class SellerUserController {
     @GetMapping("/user/index")
     public ModelAndView index(@RequestParam(value = "id", required = false) String id,     Map<String, Object> map) {
         if (id != null) {
-            SellerInfo sellerInfo = new SellerInfo();
+            SellerInfo sellerInfo = sellerInfoRepository.findById(Integer.valueOf(id));
             map.put("user", sellerInfo);
         }
         return new ModelAndView("user/index", map);

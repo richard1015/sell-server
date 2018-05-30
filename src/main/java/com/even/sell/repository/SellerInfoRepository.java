@@ -1,5 +1,6 @@
 package com.even.sell.repository;
 
+import com.even.sell.dataobject.BuyerAddress;
 import com.even.sell.dataobject.SellerInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author EVEN
@@ -14,6 +16,8 @@ import java.util.Date;
  */
 public interface SellerInfoRepository extends JpaRepository<SellerInfo, String> {
     SellerInfo findByOpenid(String openid);
+
+    SellerInfo findById(Integer Id);
 
     SellerInfo findByUsernameAndPassword(String username, String password);
 
