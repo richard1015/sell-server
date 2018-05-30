@@ -138,11 +138,19 @@ public class SellerUserController {
         map.put("userList",sellerInfoList);
         return new ModelAndView("user/list",map);
     }
+
     /**
-     * 新增用户
-     **/
+     * 展示
+     * @param id
+     * @param map
+     * @return
+     */
     @GetMapping("/user/index")
-    public ModelAndView logout() {
-        return new ModelAndView("user/index");
+    public ModelAndView index(@RequestParam(value = "id", required = false) String id,     Map<String, Object> map) {
+        if (id != null) {
+            SellerInfo sellerInfo = new SellerInfo();
+            map.put("user", sellerInfo);
+        }
+        return new ModelAndView("user/index", map);
     }
 }

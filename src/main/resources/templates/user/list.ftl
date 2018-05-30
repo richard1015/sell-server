@@ -22,6 +22,7 @@
                             <th>电话</th>
                             <th>创建时间</th>
                             <th>修改时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,7 @@
                             <td>${productInfo.tel!""}</td>
                             <td>${productInfo.createTime}</td>
                             <td>${productInfo.updateTime}</td>
+                            <td><a href="/sell/seller/user/index?id=${productInfo.id}">修改</a></td>
                         </tr>
                         </#list>
                         </tbody>
