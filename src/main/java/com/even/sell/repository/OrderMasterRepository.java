@@ -4,6 +4,7 @@ import com.even.sell.dataobject.OrderMaster;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
 
     List<OrderMaster> findByOrderId(String orderId);
 
-
-
-
+    @Query(value="select count (om.orderId) as count,om.buyerAddress  from OrderMaster as om GROUP by om.buyerAddress")
+    List<Object[]> findGroupBuyerAddress();
 }
