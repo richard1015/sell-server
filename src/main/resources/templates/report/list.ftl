@@ -1,4 +1,7 @@
 <html>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- ECharts单文件引入 -->
+<script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.min.js"></script>
 <#include "../common/header.ftl">
 
 <body>
@@ -9,79 +12,125 @@
 
 <#--主要内容content-->
     <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <table class="table table-bordered table-condensed">
-                        <thead>
-                        <tr>
-                            <th>商品id</th>
-                            <th>名称</th>
-                            <th>图片</th>
-                            <th>单价</th>
-                            <th>库存</th>
-                            <th>描述</th>
-                            <th>类目</th>
-                            <th>创建时间</th>
-                            <th>修改时间</th>
-                            <th colspan="2">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <#list productInfoPage.content as productInfo>
-                        <tr>
-                            <td>${productInfo.productId}</td>
-                            <td>${productInfo.productName}</td>
-                            <td><img height="100" width="100" src="${productInfo.productIcon}" alt=""></td>
-                            <td>${productInfo.productPrice}</td>
-                            <td>${productInfo.productStock}</td>
-                            <td>${productInfo.productDescription}</td>
-                            <td>${productInfo.categoryType}</td>
-                            <td>${productInfo.createTime}</td>
-                            <td>${productInfo.updateTime}</td>
-                            <td><a href="/sell/seller/product/index?productId=${productInfo.productId}">修改</a></td>
-                            <td>
-                                <#if productInfo.getProductStatusEnum().message == "在架">
-                                    <a href="/sell/seller/product/off_sale?productId=${productInfo.productId}">下架</a>
-                                <#else>
-                                    <a href="/sell/seller/product/on_sale?productId=${productInfo.productId}">上架</a>
-                                </#if>
-                            </td>
-                        </tr>
-                        </#list>
-                        </tbody>
-                    </table>
-                </div>
-
-            <#--分页-->
-                <div class="col-md-12 column">
-                    <ul class="pagination pull-right">
-                    <#if currentPage lte 1>
-                        <li class="disabled"><a href="#">上一页</a></li>
-                    <#else>
-                        <li><a href="/sell/seller/product/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
-                    </#if>
-
-                    <#list 1..productInfoPage.getTotalPages() as index>
-                        <#if currentPage == index>
-                            <li class="disabled"><a href="#">${index}</a></li>
-                        <#else>
-                            <li><a href="/sell/seller/product/list?page=${index}&size=${size}">${index}</a></li>
-                        </#if>
-                    </#list>
-
-                    <#if currentPage gte productInfoPage.getTotalPages()>
-                        <li class="disabled"><a href="#">下一页</a></li>
-                    <#else>
-                        <li><a href="/sell/seller/product/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
-                    </#if>
-                    </ul>
-                </div>
-            </div>
+        <div class="container-fluid" id="main" style="height: 400px;">
+             报表预留区
+        </div>
+        <div class="container-fluid" id="main1" style="height: 400px;">
+            报表预留区
+        </div>
+        <div class="container-fluid" id="main2" style="height: 400px;">
+            报表预留区
         </div>
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        var tArray ={
+            names:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+            rows:[5, 20, 40, 10, 10, 20]
+        };
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('main1'));
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        // 指定图表的配置项和数据
+        var option = {
+            color: ['#3398DB'],
+            title: {
+                text: '报表1'
+            },
+            tooltip: {},
+            legend: {
+                data: ['数据']
+            },
+            xAxis: {
+                data: tArray.names,
+        axisLabel: {
+            interval: 0,
+                    rotate: 40
+        }
+    },
+        grid: {
+            left: '10%',
+                    bottom: '35%'
+        },
+        yAxis: {},
+        series: [{
+            name: '数据',
+            type: 'bar',
+            data: tArray.rows
+    }]
+    };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        var option1 = {
+            color: ['#3398DB'],
+            title: {
+                text: '报表2'
+            },
+            tooltip: {},
+            legend: {
+                data: ['数据']
+            },
+            xAxis: {
+                data: tArray.names,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 40
+                }
+            },
+            grid: {
+                left: '10%',
+                bottom: '35%'
+            },
+            yAxis: {},
+            series: [{
+                name: '数据',
+                type: 'bar',
+                data: tArray.rows
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option1);
+
+        var option2 = {
+            color: ['#3398DB'],
+            title: {
+                text: '报表3'
+            },
+            tooltip: {},
+            legend: {
+                data: ['数据']
+            },
+            xAxis: {
+                data: tArray.names,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 40
+                }
+            },
+            grid: {
+                left: '10%',
+                bottom: '35%'
+            },
+            yAxis: {},
+            series: [{
+                name: '数据',
+                type: 'bar',
+                data: tArray.rows
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    });
+</script>
 </body>
 </html>

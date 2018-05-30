@@ -129,6 +129,14 @@ public class SellerUserController {
         SellerInfo sellerInfo1 = sellerInfoRepository.save(sellerInfo);
         return sellerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "添加失败");
     }
-
+    /**
+    * 获取用户列表
+    **/
+    @GetMapping("/user/list")
+    public ModelAndView logout( Map<String, Object> map) {
+        List<SellerInfo> sellerInfoList = sellerInfoRepository.findAll();
+        map.put("userList",sellerInfoList);
+        return new ModelAndView("user/list",map);
+    }
 
 }

@@ -41,11 +41,12 @@
             </ul>
         </li>
 
-        <li class="dropdown open">
+        <li class="dropdown open" id="userMrg">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-fw fa-plus"></i> 用户管理 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li class="dropdown-header">操作</li>
-                <li><a href="/sell/seller/category/list">列表</a></li>
+                <li><a href="/sell/seller/user/list">列表</a></li>
+                <li><a href="/sell/seller/user/index">新增</a></li>
             </ul>
         </li>
 
