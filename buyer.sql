@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-05-29 21:40:51
+Date: 2018-05-30 10:50:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -251,10 +251,11 @@ CREATE TABLE `seller_info` (
   `openid` varchar(64) NOT NULL COMMENT '微信openid',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `state` int(11) DEFAULT NULL COMMENT '0:表示普通卖家，1表示超级管理员',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='卖家信息表';
 
 -- ----------------------------
 -- Records of seller_info
 -- ----------------------------
-INSERT INTO `seller_info` VALUES ('qwe123', '慕善文', '123456', '123123', '2018-05-01 20:21:02', '2018-05-01 20:21:20');
+INSERT INTO `seller_info` VALUES ('qwe123', '慕善文', '123456', '123123', '2018-05-01 20:21:02', '2018-05-29 23:48:00', '0');
