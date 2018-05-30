@@ -95,9 +95,9 @@ public class SellerUserController {
             CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
         }
 
-        map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/login");
-        return new ModelAndView("common/success", map);
+//        map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
+//        map.put("url", "/sell/seller/login");
+        return new ModelAndView("login/login");
     }
 
 

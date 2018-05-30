@@ -8,12 +8,14 @@ import com.even.sell.utils.CookieUtil;
 import com.even.sell.utils.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -91,6 +93,37 @@ public class QuestionController {
         return questionList.size() > 0 ? ResultVOUtil.success(questionList) : ResultVOUtil.error(50000, "回复失败");
     }
 
+    /**
+     * \根据卖家Id进行查询问题
+     *
+     *
+     * @return
+     */
+    @GetMapping("/list")
+    public ModelAndView findAllBySellerId(Map<String, Object> map) {
+        List<Question> questionList = questionRepository.findAll();
+        map.put("questionList", questionList);
+        return new ModelAndView("feedback/list", map);
+    }
+
+    /**
+     * 展示
+     * @param questionId
+     * @param map
+     * @return
+     */
+    @GetMapping("/index")
+    public ModelAndView index(@RequestParam(value = "questionId", required = false) String questionId,
+                              Map<String, Object> map) {
+        if (questionId != null) {
+            Question question=new Question();
+            question.setCreateTime(new Date());
+            question.setSellerId(questionId);
+            List<Question> questionList =  questionRepository.findBySellerId(question.getSellerId());
+            map.put("question", questionList);
+        }
+        return new ModelAndView("feedback/index", map);
+    }
 
 }
 
