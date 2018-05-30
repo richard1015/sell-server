@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * @author EVEN
@@ -18,6 +19,6 @@ public interface SellerInfoRepository extends JpaRepository<SellerInfo, String> 
 
     @Transactional
     @Modifying
-    @Query("update SellerInfo as s set s.tel = ?1,s.email=?2 where s.id=?3")
-    int updateById(String tel, String email, String id);
+    @Query("update SellerInfo as s set s.tel = ?1,s.email=?2,s.updateTime=?3 where s.id=?4")
+    int updateById(String tel, String email, Date updateTime, String id);
 }

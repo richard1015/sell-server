@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -44,13 +45,13 @@ public class SellerUserController {
 //    @Autowired
 //    private ProjectUrlConfig projectUrlConfig;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public ResultVO login(
-            HttpServletResponse response) {
+            HttpServletResponse response,@RequestBody SellerInfo sellerInfo) {
 
         //1. openid去和数据库里的数据匹配
-        SellerInfo sellerInfo = sellerInfoRepository.findByUsernameAndPassword("慕善文", "123456");
+        SellerInfo sellerInfo1 = sellerInfoRepository.findByUsernameAndPassword(sellerInfo.getUsername(), sellerInfo.getPassword());
 //        if (sellerInfo == null) {
 //            map.put("msg", ResultEnum.LOGIN_FAIL.getMessage());
 //            map.put("url", "/sell/seller/order/list");
@@ -65,10 +66,9 @@ public class SellerUserController {
 //
 //        //3. 设置token至cookie
 //        CookieUtil.set(response, CookieConstant.TOKEN, token, EXPIRE);
-        return sellerInfo!=null ? ResultVOUtil.success(sellerInfo) : ResultVOUtil.error(50000, "失败");
+        return sellerInfo1!=null ? ResultVOUtil.success(sellerInfo1) : ResultVOUtil.error(50000, "失败");
 //        //return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sell/seller/order/list");
 //        return new ModelAndView("redirect:" + "/sell/seller/order/list");
-
     }
 
     @GetMapping("/findAll")
@@ -108,8 +108,10 @@ public class SellerUserController {
      * @return
      */
     @PostMapping("/update")
+    @ResponseBody
     public ResultVO update(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
-        int res = sellerInfoRepository.updateById(sellerInfo.getTel(),sellerInfo.getEmail(),sellerInfo.getId());
+        sellerInfo.setUpdateTime(new Date());
+        int res = sellerInfoRepository.updateById(sellerInfo.getTel(),sellerInfo.getEmail(),sellerInfo.getUpdateTime(),sellerInfo.getId());
         return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
     }
 
@@ -119,6 +121,7 @@ public class SellerUserController {
      * @return
      */
     @PostMapping("/register")
+    @ResponseBody
     public ResultVO register(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
         if (sellerInfo.getId() == null) {
             sellerInfo.setId("id_" + sellerInfo.getUsername());
