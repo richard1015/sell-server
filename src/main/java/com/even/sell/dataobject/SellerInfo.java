@@ -5,6 +5,8 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author EVEN
  * 2018/5/1 19:33
@@ -20,4 +22,8 @@ public class SellerInfo {
     private String password;
 
     private String openid;
+
+    private String state;
+    private Date createTime;
+    private Date updateTime;
 }

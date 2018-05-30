@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-05-29 09:53:47
+Date: 2018-05-29 21:40:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -222,19 +222,23 @@ INSERT INTO `product_info` VALUES ('1526478488945590204', '减龄百褶裙2018�
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `comment` varchar(255) DEFAULT NULL,
+  `buyer_id` varchar(255) DEFAULT NULL,
+  `seller_id` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
   `reply` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('1', 'nihaoa a ', '1234456', null, null);
-INSERT INTO `question` VALUES ('2', 'nihaoa a ', '1234456', null, null);
-INSERT INTO `question` VALUES ('3', 'nihaoa a ', '1234456', '2018-05-28 23:14:30', null);
+INSERT INTO `question` VALUES ('1', 'id_even', null, 'nihaoa a ', null, '1234456', '2018-05-29 21:34:50', '2018-05-29 21:34:50', '0');
+INSERT INTO `question` VALUES ('2', 'id_even', null, 'nihaoa a ', null, '1234456', '2018-05-29 21:34:51', '2018-05-29 21:34:51', '0');
+INSERT INTO `question` VALUES ('3', 'id_even', null, 'nihaoa a ', null, '1234456', '2018-05-29 21:34:53', '2018-05-29 21:34:53', '0');
 
 -- ----------------------------
 -- Table structure for seller_info
