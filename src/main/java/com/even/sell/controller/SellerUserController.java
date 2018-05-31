@@ -47,6 +47,8 @@ public class SellerUserController {
 //    @Autowired
 //    private ProjectUrlConfig projectUrlConfig;
 
+
+
     @PostMapping("/login")
     @ResponseBody
     public ResultVO login(
@@ -99,6 +101,12 @@ public class SellerUserController {
 
 //        map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
 //        map.put("url", "/sell/seller/login");
+        return new ModelAndView("login/login");
+    }
+
+
+    @GetMapping("/toLogin")
+    public ModelAndView toLogin() {
         return new ModelAndView("login/login");
     }
 
