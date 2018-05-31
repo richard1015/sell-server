@@ -8,7 +8,7 @@ spring:
     show-sql: true
 server:
   servlet:
-    context-path: /sell
+    context-path: /
   port: 8105
 logging:
   pattern:
