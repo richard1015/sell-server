@@ -32,7 +32,7 @@ import java.util.*;
  * 2018/5/1 19:29
  */
 @Controller
-@RequestMapping("/seller")
+@RequestMapping("/sell/seller")
 public class SellerUserController {
 
     @Autowired

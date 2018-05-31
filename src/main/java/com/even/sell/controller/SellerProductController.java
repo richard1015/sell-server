@@ -33,7 +33,7 @@ import static org.springframework.data.domain.PageRequest.of;
  * 2018/4/29 15:54
  */
 @Controller
-@RequestMapping("/seller/product")
+@RequestMapping("/sell/seller/product")
 public class SellerProductController {
 
     @Autowired

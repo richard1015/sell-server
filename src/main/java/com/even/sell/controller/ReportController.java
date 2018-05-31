@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/seller/report")
+@RequestMapping("/sell/seller/report")
 public class ReportController {
 
 

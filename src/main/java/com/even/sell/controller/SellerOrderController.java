@@ -22,7 +22,7 @@ import java.util.Map;
  * 2018/5/3 21:18
  */
 @Controller
-@RequestMapping("/seller/order")
+@RequestMapping("/sell/seller/order")
 @Slf4j
 public class SellerOrderController {
 

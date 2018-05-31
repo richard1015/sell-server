@@ -23,7 +23,7 @@ import java.util.Map;
  * 2018/4/29 18:17
  */
 @Controller
-@RequestMapping("/seller/category")
+@RequestMapping("/sell/seller/category")
 public class SellerCategoryController {
 
     @Autowired

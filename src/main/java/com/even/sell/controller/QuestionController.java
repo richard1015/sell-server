@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/buyer/question")
+@RequestMapping("/sell/buyer/question")
 public class QuestionController {
 
 
