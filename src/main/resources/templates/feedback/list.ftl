@@ -79,7 +79,7 @@
             }
             $.ajax({
                 type: 'POST',
-                url: "/sell/buyer/question/reply",
+                url: "/buyer/question/reply",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({
                     id: id,
