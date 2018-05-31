@@ -103,7 +103,7 @@
 
 <#--播放音乐-->
 <audio id="notice" loop="loop">
-    <source src="/sell/mp3/song.mp3" type="audio/mpeg" />
+    <source src="/mp3/song.mp3" type="audio/mpeg" />
 </audio>
 
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
