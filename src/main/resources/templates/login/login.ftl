@@ -51,9 +51,10 @@
             success: function(data){
                 console.log(data);
                 if(data.code==0){
-
                     localStorage.setItem("userInfo",JSON.stringify(data.data));
                     window.location.href="/sell/seller/order/list";
+                }else{
+                    alert("账号密码错误！")
                 }
             }
         });

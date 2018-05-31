@@ -17,6 +17,7 @@
                         <tr>
                             <th>用户id</th>
                             <th>用户姓名</th>
+                            <th>密码</th>
                             <th>类型</th>
                             <th>邮箱</th>
                             <th>电话</th>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>${productInfo.id}</td>
                             <td>${productInfo.username}</td>
+                            <td>${productInfo.password}</td>
                             <td>
                                   <#if productInfo.state=="1">
                                      超级管理员

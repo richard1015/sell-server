@@ -111,6 +111,7 @@
 <script>
     var userInfo= localStorage.getItem("userInfo");
     userInfo=JSON.parse(userInfo);
+    debugger
     if(userInfo.state==0){
         $("#userMrg").hide(200);
     }else{
