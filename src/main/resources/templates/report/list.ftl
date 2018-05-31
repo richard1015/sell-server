@@ -13,7 +13,7 @@
 <#--主要内容content-->
     <div id="page-content-wrapper">
         <div class="container-fluid" id="main" style="height: 400px;">
-             报表预留区
+            报表预留区
         </div>
         <div class="container-fluid" id="main1" style="height: 400px;">
             报表预留区
@@ -27,9 +27,15 @@
 
 <script>
     $(document).ready(function () {
-        var tArray ={
-            names:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
-            rows:[5, 20, 40, 10, 10, 20]
+        var shopsList = ${shopsList![]};
+        var citysList = ${citysList![]};
+        var nameList = ${nameList![]};
+        console.log(shopsList)
+        console.log(citysList)
+        console.log((nameList))
+        var tArray = {
+            names: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+            rows: [5, 20, 40, 10, 10, 20]
         };
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
@@ -41,45 +47,14 @@
         var option = {
             color: ['#3398DB'],
             title: {
-                text: '报表1'
+                text: '城市下单报表'
             },
             tooltip: {},
             legend: {
                 data: ['数据']
             },
             xAxis: {
-                data: tArray.names,
-        axisLabel: {
-            interval: 0,
-                    rotate: 40
-        }
-    },
-        grid: {
-            left: '10%',
-                    bottom: '35%'
-        },
-        yAxis: {},
-        series: [{
-            name: '数据',
-            type: 'bar',
-            data: tArray.rows
-    }]
-    };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-
-        var option1 = {
-            color: ['#3398DB'],
-            title: {
-                text: '报表2'
-            },
-            tooltip: {},
-            legend: {
-                data: ['数据']
-            },
-            xAxis: {
-                data: tArray.names,
+                data: citysList.names,
                 axisLabel: {
                     interval: 0,
                     rotate: 40
@@ -93,7 +68,38 @@
             series: [{
                 name: '数据',
                 type: 'bar',
-                data: tArray.rows
+                data: citysList.rows
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        var option1 = {
+            color: ['#3398DB'],
+            title: {
+                text: '商品下单报表'
+            },
+            tooltip: {},
+            legend: {
+                data: ['数据']
+            },
+            xAxis: {
+                data: shopsList.names,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 40
+                }
+            },
+            grid: {
+                left: '10%',
+                bottom: '35%'
+            },
+            yAxis: {},
+            series: [{
+                name: '数据',
+                type: 'bar',
+                data: shopsList.rows
             }]
         };
 
@@ -103,14 +109,14 @@
         var option2 = {
             color: ['#3398DB'],
             title: {
-                text: '报表3'
+                text: '业务员回复报表'
             },
             tooltip: {},
             legend: {
                 data: ['数据']
             },
             xAxis: {
-                data: tArray.names,
+                data: nameList.names,
                 axisLabel: {
                     interval: 0,
                     rotate: 40
@@ -124,7 +130,7 @@
             series: [{
                 name: '数据',
                 type: 'bar',
-                data: tArray.rows
+                data: nameList.rows
             }]
         };
 
