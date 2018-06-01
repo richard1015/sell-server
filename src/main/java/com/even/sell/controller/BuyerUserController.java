@@ -111,8 +111,14 @@ public class BuyerUserController {
         if (buyerInfo.getId() == null) {
             buyerInfo.setId("id_" + buyerInfo.getUsername());
         }
-        BuyerInfo buyerInfo1 = buyerInfoRepository.save(buyerInfo);
-        return buyerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
+        BuyerInfo buyerInfo0 = buyerInfoRepository.findByUsername(buyerInfo.getUsername());
+        if (buyerInfo0 == null) {
+            BuyerInfo buyerInfo1 = buyerInfoRepository.save(buyerInfo);
+            return buyerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
+        } else {
+            return ResultVOUtil.error(50001, "该用户名已经注册过了");
+        }
+
     }
 
 
@@ -125,8 +131,8 @@ public class BuyerUserController {
     public ResultVO update(HttpServletRequest request, @Valid @RequestBody BuyerInfo buyerInfo) {
         Cookie cookie = CookieUtil.get(request, "userId");
         String buyerId = buyerService.findBuyerInfoById(cookie.getValue()).getId();
-        int res = buyerInfoRepository.updateById(buyerInfo.getTel(),buyerInfo.getEmail(),buyerInfo.getSex(),buyerId);
-        return res >0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
+        int res = buyerInfoRepository.updateById(buyerInfo.getTel(), buyerInfo.getEmail(), buyerInfo.getSex(), buyerId);
+        return res > 0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "注册失败");
     }
 
 }

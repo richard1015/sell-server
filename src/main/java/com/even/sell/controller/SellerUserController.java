@@ -135,8 +135,14 @@ public class SellerUserController {
         if (sellerInfo.getId() == null) {
             sellerInfo.setId("id_" + sellerInfo.getUsername());
         }
-        SellerInfo sellerInfo1 = sellerInfoRepository.save(sellerInfo);
-        return sellerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "添加失败");
+        SellerInfo sellerInfo0 = sellerInfoRepository.findByUsername(sellerInfo.getUsername());
+        if (sellerInfo0 == null) {
+            SellerInfo sellerInfo1 = sellerInfoRepository.save(sellerInfo);
+            return sellerInfo1 != null ? ResultVOUtil.success() : ResultVOUtil.error(50000, "添加失败");
+        } else {
+            return ResultVOUtil.error(50001, "该用户名已经注册过了");
+        }
+
     }
 
     /**
