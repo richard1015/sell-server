@@ -40,16 +40,18 @@ public class ProductServiceImpl implements ProductService {
         return repository.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
 
+
     @Override
     public Page<ProductInfo> findAll(Pageable pageable, Integer categoryType) {
         Specification<ProductInfo> specification = new Specification<ProductInfo>() {
             @Override
             public Predicate toPredicate(Root<ProductInfo> root,
                                          CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                Predicate p1 = criteriaBuilder.equal(root.get("productStatus"),"0");
+
                 if(categoryType == -1){
-                    return p1;
+                    return criteriaBuilder.and();
                 }else{
+                    Predicate p1 = criteriaBuilder.equal(root.get("productStatus"),"0");
                     Predicate p2 = criteriaBuilder.equal(root.get("categoryType"),categoryType);
                     return criteriaBuilder.and(p1,p2);
                 }

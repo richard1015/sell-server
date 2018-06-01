@@ -63,3 +63,13 @@
         </li>
     </ul>
 </nav>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    var userInfo= localStorage.getItem("userInfo");
+    userInfo=JSON.parse(userInfo);
+    if(userInfo.state==0){
+        $("#userMrg").hide(200);
+    }else{
+        $("#userMrg").show(200);
+    }
+</script>
