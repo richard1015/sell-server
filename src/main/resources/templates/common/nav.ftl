@@ -50,7 +50,7 @@
             </ul>
         </li>
 
-        <li class="dropdown open">
+        <li class="dropdown open" id="reportMrg">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-fw fa-plus"></i> 统计分析 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li class="dropdown-header">操作</li>
@@ -69,7 +69,9 @@
     userInfo=JSON.parse(userInfo);
     if(userInfo.state==0){
         $("#userMrg").hide(200);
+        $("#reportMrg").hide(200);
     }else{
         $("#userMrg").show(200);
+        $("#reportMrg").show(200);
     }
 </script>
