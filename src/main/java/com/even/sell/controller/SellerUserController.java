@@ -142,7 +142,6 @@ public class SellerUserController {
         } else {
             return ResultVOUtil.error(50001, "该用户名已经注册过了");
         }
-
     }
 
     /**
