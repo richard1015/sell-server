@@ -125,14 +125,14 @@ public class SellerUserController {
     }
 
     /**
-     * 买家检查登陆状态
+     *
      *
      * @return
      */
     @PostMapping("/register")
     @ResponseBody
     public ResultVO register(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
-        if (sellerInfo.getId() == null) {
+        if (sellerInfo.getId() == null|| "".equals(sellerInfo.getId())) {
             sellerInfo.setId("id_" + sellerInfo.getUsername());
         }
         SellerInfo sellerInfo0 = sellerInfoRepository.findByUsername(sellerInfo.getUsername());

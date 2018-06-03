@@ -81,6 +81,8 @@
                 if (data.code == 0) {
                     alert(userId ? '修改成功' : "添加成功");
                     window.location.href = "/sell/seller/user/list"
+                }else if(data.code == 50001){
+                    alert("该业务员已经存在");
                 }
             }
         });
