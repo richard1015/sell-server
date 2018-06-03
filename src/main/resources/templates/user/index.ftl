@@ -14,10 +14,9 @@
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label>用户id</label>
-                            <input id="userId" disabled type="text" class="form-control" value="${(user.id)!''}"/>
-                        </div>
+                        <#--<div class="form-group">-->
+                            <#--<label>用户id</label>-->
+                        <#--</div>-->
                         <div class="form-group">
                             <label>账号</label>
                             <input id="username" type="text" class="form-control" value="${(user.username)!''}"/>
@@ -25,7 +24,7 @@
                         <div class="form-group">
                             <label>密码</label>
                             <#if user.id??>
-                                                        <input id="password" type="password" disabled
+                                                        <input id="password" type="password"
                                                                class="form-control"
                                                                value="${(user.password)!''}"/>
                             <#else>
@@ -44,6 +43,7 @@
                         </div>
                         <input hidden type="text" id="state" value="${(user.state)!''}">
                         <input hidden type="text" id="userid" value="${(user.id)!''}">
+                        <input id="userId" hidden type="text" disabled value="${(user.id)!''}"/>
                         <button type="button" class="btn btn-default" onclick="submitOK()">提交</button>
                     </form>
                 </div>
@@ -70,6 +70,7 @@
             openid: new Date().getTime(),
             id: id
         };
+        console.log(params)
         $.ajax({
             type: 'POST',
             url: userId ? "/sell/seller/update" : "/sell/seller/register",
@@ -83,6 +84,8 @@
                     window.location.href = "/sell/seller/user/list"
                 }else if(data.code == 50001){
                     alert("该业务员已经存在");
+                }else{
+                    alert("提交失败！")
                 }
             }
         });

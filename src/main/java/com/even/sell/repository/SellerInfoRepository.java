@@ -23,8 +23,8 @@ public interface SellerInfoRepository extends JpaRepository<SellerInfo, String> 
 
     @Transactional
     @Modifying
-    @Query("update SellerInfo as s set s.tel = ?1,s.email=?2,s.updateTime=?3 where s.id=?4")
-    int updateById(String tel, String email, Date updateTime, String id);
+    @Query("update SellerInfo as s set s.tel = ?1,s.email=?2,s.updateTime=?3,s.password=?4,s.username=?5 where s.id=?6")
+    int updateById(String tel, String email, Date updateTime, String password,String username, String id);
 
     SellerInfo findByUsername(String username);
 }

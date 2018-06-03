@@ -120,7 +120,7 @@ public class SellerUserController {
     @ResponseBody
     public ResultVO update(HttpServletRequest request, @Valid @RequestBody SellerInfo sellerInfo) {
         sellerInfo.setUpdateTime(new Date());
-        int res = sellerInfoRepository.updateById(sellerInfo.getTel(), sellerInfo.getEmail(), sellerInfo.getUpdateTime(), sellerInfo.getId());
+        int res = sellerInfoRepository.updateById(sellerInfo.getTel(), sellerInfo.getEmail(), sellerInfo.getUpdateTime(),sellerInfo.getPassword(),sellerInfo.getUsername(), sellerInfo.getId());
         return res > 0 ? ResultVOUtil.success() : ResultVOUtil.error(50000, "修改失败");
     }
 
